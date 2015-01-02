@@ -174,7 +174,7 @@ MAILX/SENDMAIL:
 Debug configuration - /etc/syslog.conf
 MAIN configuration - /etc/mail/sendmail.cf
 
-mailx -s "Test Mail" AstroTransformerST@int.amdocs.com sshetty@amdocs.com
+mailx -s "Test Mail" test@gmail.com
 
 FIND COMMANDS:
 #To ignore . from the output
@@ -201,12 +201,6 @@ g/outdated/d
 #crontab setting
 VISUAL=vi
 
-ENSIGHT COMMANDS:
-EnSight_Remote sprenv ENS	
-EnSight_Remote sprenv99 ENS
-EnSight_Remote fdt FDT
-ensGetUserModuleProperty -user SprVision930_app97:fdtst@indsun003 -module java
-
 SOFTWARE COMMANDS:
 For finding cobol version - $COBDIR/cobrun
 For finding cobol fixpacks info - $COBDIR/cob32 -V
@@ -214,11 +208,11 @@ For finding cobol fixpacks info - $COBDIR/cob32 -V
 
 ORACLE COMMANDS:
 #for exp single/multiple tables, separated by comma
-/oravl01/oracle/dba/dbmon/gzexp spropr48/spropr48@sprsst10 file=spropr48.dmp log=spropr48.log
-/oravl01/oracle/dba/dbmon/gzexp spropr70/spropr70@nxtdev10 file=spropr70_jobdbconnect.dmp log=spropr70_jobdbconnect.log tables='jobdbconnect' 
-/oravl01/oracle/dba/dbmon/gzexp ensight/ensight@nxtenb10 file=ensight_db.dmp parfile=parfile_ens.par LOG=ensight_db.log
+/oravl01/oracle/dba/dbmon/gzexp opr/opr@instance file=spropr48.dmp log=spropr48.log
+/oravl01/oracle/dba/dbmon/gzexp opr/opr@instance file=spropr70_jobdbconnect.dmp log=spropr70_jobdbconnect.log tables='jobdbconnect' 
+/oravl01/oracle/dba/dbmon/gzexp opr/opr@instance file=ensight_db.dmp parfile=parfile_ens.par LOG=ensight_db.log
 #for imp single/multiple tables, separated by comma
-/oravl01/oracle/dba/dbmon/gzimp spropr22/spropr22@sprsst10 file=sptopr11.dmp log=spropr22.dmp.log statistics=none constraints=none full=y ignore=y grants=n buffer=1024000 commit=y feedback=100000
+/oravl01/oracle/dba/dbmon/gzimp opr/opr@instance file=sptopr11.dmp log=spropr22.dmp.log statistics=none constraints=none full=y ignore=y grants=n buffer=1024000 commit=y feedback=100000
 oerr ora <ora-error-number>
 drop synonym <syn-name>
 create synonym <syn_name> for <db>.<table>
@@ -237,27 +231,6 @@ JAVA COMMANDS:
 #for finding the jclass version
 java -cp jcschart.jar com.klg.jclass.chart.JCVersion
 
-CRM COMMANDS:
-./dataex -user_name sa -password sa -db_name vmscrm20 -db_server vmscrm20 -imp /viminfrahome/vim/test/wadm/R2_TRN/ONE_TIME/skill4.dat
-./RefreshDatabase.ksh - to just run schema on a split CRM DB
-
-ABP COMMANDS:
-### packing a repository
-./AimPackRepository.ksh -e DCOM_XDM_BACKUP2 -t /dcomabpccuser2/Restore
-AimPackRepository.ksh -u DCOM_XDM_BACKUP2
-### unlocking the amcAdmin user
-Login with root/Root00 and go to security->Users->Unlock->save
-### MRO
-#MRO variables
-AMC_NO_MRO=on
-ABP_MRO_PORT=10351
-AMC_MRO_PORT=10351
-#Billing configuartion
-SQL> select * from bl1_inv_machine;
-#Debug to be enabled in (change from fatal to debug)
-amc1_Logger.xml
-
-lsof |grep FS|sort -n -k 7
 
 # mysqldump ---user [user name] ---password=[password]  
 # [database name] > [dump file] 
@@ -268,9 +241,7 @@ $ cd /dir1
 $ find . -type d | cpio -pvdm ../dir2
 
 ###To check for passwordless ssh setup - if setup or not
-STATUS=$(ssh -q -o 'PreferredAuthentications=publickey' omswrk74@hpxi014 "echo";echo $?)
-
-\\indiafs1\infra$\DvciPMP\2.0 PMP\2.2 Projects Supported\2.2.2 ABP\2.2.2.14 Vodafone India\2.2.2.14.4 Configuration\2.2.2.14.4.5 Installation - Site - Production  machine
+STATUS=$(ssh -q -o 'PreferredAuthentications=publickey' aokinn@xx000 "echo";echo $?)
 
 #To extract the 7z files
 7za x dpupdate.7z --extract with directory names
@@ -283,4 +254,4 @@ nslookup -q=A
 
 
 GENERAL:
-lsof -u $LOGNAME | grep 'OMS_JMS_1.out' | awk '{ print $NF }' | sort | uniq
+lsof -u $LOGNAME | grep 'JMS_1.out' | awk '{ print $NF }' | sort | uniq
